@@ -37,7 +37,7 @@ namespace scene {
     //% onTilesOf.decompileIndirectFixedInstances=true
     //% help=github:arcade-tilemap-a-star/docs/a-star
     //% group="Path Following" weight=10
-    export function aStar(start: tiles.Location, end: tiles.Location, onTilesOf: Image = null) {
+    export function aStar(start: tiles.Location, end: tiles.Location, onTilesOf: Image | Image[] = null) {
         const tm = game.currentScene().tileMap;
         if (!tm || !start || !end)
             return undefined;
@@ -52,7 +52,7 @@ namespace scene {
             l => l.col == end1.col && l.row == end1.row);
     }
 
-    export function aStarToAnyOfType(start: tiles.Location, tile: Image, onTilesOf: Image) {
+    export function aStarToAnyOfType(start: tiles.Location, tile: Image, onTilesOf: Image | Image[]) {
         const tm = game.currentScene().tileMap;
         if (!tm || !start)
             return undefined;
@@ -70,7 +70,7 @@ namespace scene {
             });
     }
 
-    export function generalAStar(tm: tiles.TileMap, start: SimpleLocation, onTilesOf: Image,
+    export function generalAStar(tm: tiles.TileMap, start: SimpleLocation, onTilesOf: Image | Image[],
         heuristic: (tile: SimpleLocation) => number,
         isEnd: (tile: SimpleLocation) => boolean): tiles.Location[] {
 
@@ -228,10 +228,11 @@ namespace scene {
             (DIAGONAL_COST - NEIGHBOR_COST)
     }
 
-    function isWalkable(loc: SimpleLocation, onTilesOf: Image, tm: tiles.TileMap): boolean {
+    function isWalkable(loc: SimpleLocation, onTilesOf: Image | Image[], tm: tiles.TileMap): boolean {
         if (tm.isObstacle(loc.col, loc.row)) return false;
         if (!onTilesOf) return true;
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
+        if (typeof(onTilesOf) == "array") return onTilesOf.some(item => img.equals(item));
         return img.equals(onTilesOf);
     }
 }
