@@ -232,7 +232,7 @@ namespace scene {
         if (tm.isObstacle(loc.col, loc.row)) return false;
         if (!onTilesOf) return true;
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
-        if (Object.prototype.toString.call(onTilesOf) === '[object Array]') return onTilesOf.some(item => img.equals(item));
+        if ("length" in onTilesOf) return onTilesOf.some(item => img.equals(item));
         return img.equals(onTilesOf);
     }
 }
