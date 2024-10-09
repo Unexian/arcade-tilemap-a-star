@@ -1,4 +1,4 @@
-//+array+SimpleLocation sim:7.5%, meowbit:10.5% ms comparing with origin 
+//+array+SimpleLocation sim:7.5%, meowbit:10.5% ms comparing with origin
 namespace scene {
     //costs, scaled up by 1000
     const NEIGHBOR_COST = 1000;
@@ -232,7 +232,7 @@ namespace scene {
         if (tm.isObstacle(loc.col, loc.row)) return false;
         if (!onTilesOf) return true;
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
-        if (onTilesOf instanceof Array) return onTilesOf.some(item => img.equals(item));
+        if (Object.prototype.toString.call(onTilesOf) === '[object Array]') return onTilesOf.some(item => img.equals(item));
         return img.equals(onTilesOf);
     }
 }
