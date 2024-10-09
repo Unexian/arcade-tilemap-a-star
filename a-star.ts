@@ -232,6 +232,7 @@ namespace scene {
         if (tm.isObstacle(loc.col, loc.row)) return false;
         if (!onTilesOf) return true;
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
-        return ("length" in onTilesOf ? onTilesOf : [onTilesOf]).some((item: Image) => img.equals(item));
+        if (onTilesOf instanceof Image) return img.equals(onTilesOf)
+        else return onTilesOf.some((item: Image) => img.equals(item));
     }
 }
