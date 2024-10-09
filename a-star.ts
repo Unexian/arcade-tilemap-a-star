@@ -1,4 +1,4 @@
-//+array+SimpleLocation sim:7.5%, meowbit:10.5% ms comparing with origin
+//+array+SimpleLocation sim:7.5%, meowbit:10.5% ms comparing with origin 
 namespace scene {
     //costs, scaled up by 1000
     const NEIGHBOR_COST = 1000;
