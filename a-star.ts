@@ -232,11 +232,12 @@ namespace scene {
         if (tm.isObstacle(loc.col, loc.row)) return false;
         if (!onTilesOf) return true;
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
-        if (!isArrayLike(onTilesOf)) return img.equals(onTilesOf)
+        if (!isArrayLike<Image>(onTilesOf)) return img.equals(onTilesOf)
         else return onTilesOf.some((item: Image) => img.equals(item));
     }
 
-    function isArrayLike(val: any): val is Array {
-        return val && typeof(val) === "object" && val.length;
+    function isArrayLike<T>(val: T | T[]): val is Array<T> {
+        return val && typeof(val) === "object" &&
+            Object.keys(val).some(k => k == "length");
     }
 }
