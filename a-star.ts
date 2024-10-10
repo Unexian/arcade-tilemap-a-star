@@ -234,6 +234,7 @@ namespace scene {
         const img = tm.getTileImage(tm.getTileIndex(loc.col, loc.row))
         if (isImageLike(onTilesOf)) return img.equals(onTilesOf)
         if (isArrayLike<Image>(onTilesOf)) return onTilesOf.some((item: Image) => img.equals(item));
+        return true
     }
 
     function isArrayLike<T>(val: T | T[]): val is Array<T> {
